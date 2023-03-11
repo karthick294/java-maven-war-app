@@ -7,7 +7,7 @@ pipeline{
     stages{
         stage("git checkout"){
             steps{
-                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/karthick294/java-maven-app.git']])
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/karthick294/java-maven-war-app.git']])
             }
         }
         stage("maven build"){
@@ -15,17 +15,17 @@ pipeline{
              sh 'mvn clean install'   
             }
         }
-        stage("sonarqube"){
-            steps{
-                withSonarQubeEnv("SonarQube") {
-                        sh "${tool("Sonar 4.8")}/bin/sonar-scanner \
-                        -Dsonar.projectKey=java-maven-app \
-                        -Dsonar.java.binaries=target \
-                        -Dsonar.host.url=http://65.1.73.136:9000\
-                        -Dsonar.login=sqp_9118de51b93580aa5e94fd906f32400030425c62"
-                  }
-              }
-            }
+       // stage("sonarqube"){
+       //    steps{
+       //         withSonarQubeEnv("SonarQube") {
+       //                 sh "${tool("Sonar 4.8")}/bin/sonar-scanner \
+       //                 -Dsonar.projectKey=java-maven-app \
+        //                -Dsonar.java.binaries=target \
+         //               -Dsonar.host.url=http://65.1.73.136:9000\
+         //                 -Dsonar.login=sqp_9118de51b93580aa5e94fd906f32400030425c62"
+        //          }
+         //     }
+         //   }
             stage("nexus-upload"){
                 steps{
                     sh 'mvn -s settings.xml clean deploy'   
