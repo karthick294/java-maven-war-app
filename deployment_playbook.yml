@@ -3,8 +3,8 @@
   hosts: all
   become: true
   vars:
-    nexus_url: http://65.0.54.66:8081/repository
-    repository_type: java-maven-app-releases
+    nexus_url: http://3.109.138.79:8081/repository
+    repository_type: java-maven-app-release
     group_id: com%2Fmycompany%2Fapp
     artifact_id: hello-world-war
     version: 1.0.0
